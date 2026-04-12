@@ -1,0 +1,29 @@
+databases:
+  - name: psono-db
+    databaseName: psono
+    user: psono
+services:
+  - type: web
+    name: psono
+    runtime: docker
+    plan: starter
+    autoDeploy: false
+    envVars:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: psono-db
+          property: host
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: psono-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: psono-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: psono-db
+          property: password
+      - key: SECRET_KEY
+        generateValue: true
